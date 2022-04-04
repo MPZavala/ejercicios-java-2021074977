@@ -79,6 +79,13 @@ public class tabla extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnEnviar = new javax.swing.JButton();
+        mnMenu = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        mniVer = new javax.swing.JMenuItem();
+        mniFondo = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 500));
@@ -259,6 +266,34 @@ public class tabla extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Opciones");
+        mnMenu.add(jMenu1);
+
+        jMenu2.setText("Ayuda");
+
+        mniVer.setText("Información");
+        mniVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniVerActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mniVer);
+
+        mnMenu.add(jMenu2);
+
+        mniFondo.setText("Fondo");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Default");
+        mniFondo.add(jCheckBoxMenuItem1);
+
+        jCheckBoxMenuItem2.setText("Azul");
+        mniFondo.add(jCheckBoxMenuItem2);
+
+        mnMenu.add(mniFondo);
+
+        setJMenuBar(mnMenu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -281,7 +316,7 @@ public class tabla extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEnviar)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,6 +419,11 @@ public class tabla extends javax.swing.JFrame {
         tablad.addRow(info);*/
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    private void mniVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniVerActionPerformed
+        Ayuda ventana1 = new Ayuda();
+        ventana1.setVisible(true);
+    }//GEN-LAST:event_mniVerActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -426,6 +466,10 @@ public class tabla extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jpnBotones;
     private javax.swing.JPanel jpnDatos;
@@ -437,6 +481,9 @@ public class tabla extends javax.swing.JFrame {
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JMenuBar mnMenu;
+    private javax.swing.JMenu mniFondo;
+    private javax.swing.JMenuItem mniVer;
     public javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
