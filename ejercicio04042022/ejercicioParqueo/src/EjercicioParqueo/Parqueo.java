@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +19,9 @@ public class Parqueo extends javax.swing.JFrame {
     
     Usernames user = new Usernames();
     DefaultTableModel tabla;
-    Object[] data = new Object[5];
+    Object[] data = new Object[6];
+    int fila=-1;
+    DateTimeFormatter out = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     /**
      * Creates new form Parqueo
@@ -27,12 +30,13 @@ public class Parqueo extends javax.swing.JFrame {
         initComponents();
         setSize(800,560);
         setLocationRelativeTo(null);
+        setTitle("Parqueadero Carnaval");
         
         //definicion de tabla con titulos
         tabla = (DefaultTableModel) tblDatos.getModel();
         
        
-        //Resize of icons
+        //Configuracion del tamaño de iconos
         Image img = new ImageIcon("src/Imagenes/carro.png").getImage();
         ImageIcon iconoap = new ImageIcon (img.getScaledInstance(80, 71, Image.SCALE_SMOOTH));
         lblCarro.setIcon(iconoap);
@@ -46,13 +50,19 @@ public class Parqueo extends javax.swing.JFrame {
         ImageIcon iconobtn = new ImageIcon (imgb.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         btnBuscar.setIcon(iconobtn);
         
-        //get date & time
+        //Obtener fecha y hora
         DateTimeFormatter fecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         lblFecha.setText(fecha.format(LocalDateTime.now()));
         DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
         lblHora.setText(hora.format(LocalDateTime.now()));
         
         
+        
+    }
+    public void limpiar (){
+        txtPlaca.setText("");
+        txtBuscar.setText("");
+        btgTipov.clearSelection();
         
     }
 
@@ -78,7 +88,8 @@ public class Parqueo extends javax.swing.JFrame {
         lblPlaca = new javax.swing.JLabel();
         txtPlaca = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbEstado = new javax.swing.JComboBox<>();
+        btnActualizar = new javax.swing.JButton();
         jpnTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
@@ -171,7 +182,19 @@ public class Parqueo extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingreso", "Retiro" }));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingreso", "Retiro" }));
+
+        btnActualizar.setBackground(new java.awt.Color(0, 102, 204));
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setBorderPainted(false);
+        btnActualizar.setEnabled(false);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnRegistroLayout = new javax.swing.GroupLayout(jpnRegistro);
         jpnRegistro.setLayout(jpnRegistroLayout);
@@ -179,7 +202,7 @@ public class Parqueo extends javax.swing.JFrame {
             jpnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnRegistroLayout.createSequentialGroup()
                 .addGroup(jpnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jpnRegistroLayout.createSequentialGroup()
                             .addContainerGap()
@@ -188,7 +211,9 @@ public class Parqueo extends javax.swing.JFrame {
                             .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jpnRegistroLayout.createSequentialGroup()
                             .addGap(37, 37, 37)
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jpnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jpnRegistroLayout.setVerticalGroup(
@@ -198,14 +223,16 @@ public class Parqueo extends javax.swing.JFrame {
                 .addGroup(jpnRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlaca)
                     .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnActualizar)
                 .addContainerGap())
         );
 
-        jpnFondo.add(jpnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 9, 210, 110));
+        jpnFondo.add(jpnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 9, 210, 140));
 
         jpnTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Abiertos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 153, 255))); // NOI18N
         jpnTabla.setOpaque(false);
@@ -238,10 +265,10 @@ public class Parqueo extends javax.swing.JFrame {
         );
         jpnTablaLayout.setVerticalGroup(
             jpnTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
 
-        jpnFondo.add(jpnTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 800, 320));
+        jpnFondo.add(jpnTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 800, 310));
 
         jpnSesion.setOpaque(false);
 
@@ -282,6 +309,11 @@ public class Parqueo extends javax.swing.JFrame {
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.setBorderPainted(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         lblH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblH.setText("Hora:");
@@ -362,18 +394,72 @@ public class Parqueo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        //Registro de la información en variables
         user.setPlaca(txtPlaca.getText());
-        user.setHorain(lblFecha.getText() + " " + lblHora.getText());
+        user.setHorain(out.format(LocalDateTime.now()));
         if (rbtMoto.isSelected()) {
             user.setTipov("Motocicleta");
         } else if (rbtCarro.isSelected()) {
             user.setTipov("Carro");
         } else if (rbtBici.isSelected()) {
             user.setTipov("Bicicleta");
+        } else {
+            user.setTipov("");
         }
-        user.setRegistro(user.getRegistro()+1);
         user.setFechaout("");
+        if (cmbEstado.getSelectedItem().equals("Ingreso")) {
+            user.setEstado("Abierto");
+            user.setRegistro(user.getRegistro()+1);
+                //Corroborar que no falte información
+            if (user.getPlaca().length()==0 || user.getTipov().length()==0) {
+                JOptionPane.showMessageDialog(this, "La información está incompleta");
+            } else {
+            //Añadir info a la tabla
+            data[0] = user.getPlaca();
+            data[1] = user.getTipov();
+            data[2] = user.getHorain();
+            data[3] = user.getFechaout();
+            data[4] = user.getEstado();
+            data[5] = user.getRegistro();
+            tabla.addRow(data);
+            limpiar();
+            }
+        } else{
+            JOptionPane.showMessageDialog(this, "Para actualizar un vehículo, por favor seleccione buscar para poder realizar la acción");
+        }
+        
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+        fila = tblDatos.getSelectedRow();
+        if (tblDatos.getSelectedRow() != -1) {
+            txtBuscar.setText(tblDatos.getValueAt(fila, 0).toString());
+            btnRegistrar.setEnabled(false);
+            btnActualizar.setEnabled(true);
+            txtPlaca.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        //Verificar estado seleccionado para actualización
+        if (cmbEstado.getSelectedItem().equals("Retiro")){
+            user.cerrar();
+            user.setFechaout(out.format(LocalDateTime.now()));
+            if (fila !=-1) {
+                tblDatos.setValueAt(user.getFechaout(), fila, 3);
+                tblDatos.setValueAt(user.getEstado(), fila, 4);
+            }
+            limpiar();
+            btnRegistrar.setEnabled(true);
+            btnActualizar.setEnabled(false);
+            txtPlaca.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Para registrar un reingreso, favor de ingresarlo como un nuevo vehículo");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,10 +498,11 @@ public class Parqueo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgTipov;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSesion;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jpnExtras;
     private javax.swing.JPanel jpnFondo;

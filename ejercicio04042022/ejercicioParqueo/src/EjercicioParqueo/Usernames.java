@@ -24,13 +24,15 @@ public class Usernames {
     public Usernames() {
     }
 
-    public Usernames(String estado) {
-        this.estado = "abierto";
+   
+
+    public Usernames(int registro) {
+        this.registro = 0;
     }
     
     public void cerrar() {
-        if (this.estado.equals("abierto")) {
-            this.estado = "cerrado";
+        if (this.estado.equals("Abierto")) {
+            this.estado = "Cerrado";
         }
         else {
             JOptionPane.showMessageDialog(null, "Este registro ya se encuentra cerrado");

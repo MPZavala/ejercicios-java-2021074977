@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setSize(680,350);
+        setSize(670,350);
         setLocationRelativeTo(null);
         setTitle("Inicio Sesion");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
