@@ -27,9 +27,12 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         //Resize of user icon
-        Image img = new ImageIcon("src/Imagenes/user.png").getImage();
-        ImageIcon iconoap = new ImageIcon (img.getScaledInstance(200, 198, Image.SCALE_SMOOTH));
-        lblIcon.setIcon(iconoap);
+        ImageIcon imageIcon = new ImageIcon(this.getClass().getClassLoader().getResource("src/Imagenes/user.png"));
+        //Image img = new ImageIcon("src/Imagenes/user.png").getImage();
+        Image img = imageIcon.getImage();
+        Image iconoap = img.getScaledInstance(200, 198, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(iconoap);
+        lblIcon.setIcon(imageIcon);
         
         
         
