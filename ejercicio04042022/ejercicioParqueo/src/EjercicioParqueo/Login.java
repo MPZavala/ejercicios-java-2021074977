@@ -4,8 +4,6 @@
  */
 package EjercicioParqueo;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,14 +24,7 @@ public class Login extends javax.swing.JFrame {
         setTitle("Inicio Sesion");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        //Resize of user icon
-        ImageIcon imageIcon = new ImageIcon(this.getClass().getClassLoader().getResource("src/Imagenes/user.png"));
-        //Image img = new ImageIcon("src/Imagenes/user.png").getImage();
-        Image img = imageIcon.getImage();
-        Image iconoap = img.getScaledInstance(200, 198, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(iconoap);
-        lblIcon.setIcon(imageIcon);
-        
+               
         
         
     }
@@ -185,15 +176,19 @@ public class Login extends javax.swing.JFrame {
 
         jpnIcono.setOpaque(false);
 
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/user1.png"))); // NOI18N
+
         javax.swing.GroupLayout jpnIconoLayout = new javax.swing.GroupLayout(jpnIcono);
         jpnIcono.setLayout(jpnIconoLayout);
         jpnIconoLayout.setHorizontalGroup(
             jpnIconoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnIconoLayout.setVerticalGroup(
             jpnIconoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jpnIconoLayout.createSequentialGroup()
+                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jpnFondo.add(jpnIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 78, -1, -1));

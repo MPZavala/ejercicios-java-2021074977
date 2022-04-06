@@ -36,19 +36,7 @@ public class Parqueo extends javax.swing.JFrame {
         tabla = (DefaultTableModel) tblDatos.getModel();
         
        
-        //Configuracion del tamaño de iconos
-        Image img = new ImageIcon("src/Imagenes/carro.png").getImage();
-        ImageIcon iconoap = new ImageIcon (img.getScaledInstance(80, 71, Image.SCALE_SMOOTH));
-        lblCarro.setIcon(iconoap);
-        Image img2 = new ImageIcon("src/Imagenes/moto.png").getImage();
-        ImageIcon icono2 = new ImageIcon (img2.getScaledInstance(80, 71, Image.SCALE_SMOOTH));
-        lblMoto.setIcon(icono2);
-        Image img3 = new ImageIcon("src/Imagenes/bici.png").getImage();
-        ImageIcon icono3 = new ImageIcon (img3.getScaledInstance(80, 71, Image.SCALE_SMOOTH));
-        lblBici.setIcon(icono3);
-        Image imgb = new ImageIcon("src/Imagenes/lupa.png").getImage();
-        ImageIcon iconobtn = new ImageIcon (imgb.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        btnBuscar.setIcon(iconobtn);
+        
         
         //Obtener fecha y hora
         DateTimeFormatter fecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -111,6 +99,12 @@ public class Parqueo extends javax.swing.JFrame {
 
         jpnTipov.setOpaque(false);
 
+        lblCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro_1.png"))); // NOI18N
+
+        lblBici.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bici1.png"))); // NOI18N
+
+        lblMoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/moto.png"))); // NOI18N
+
         btgTipov.add(rbtMoto);
         rbtMoto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rbtMoto.setText("Motocicleta");
@@ -154,9 +148,9 @@ public class Parqueo extends javax.swing.JFrame {
             .addGroup(jpnTipovLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnTipovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCarro, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                    .addComponent(lblBici, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                    .addComponent(lblMoto, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                    .addComponent(lblCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBici, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jpnTipovLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtMoto)
@@ -164,7 +158,7 @@ public class Parqueo extends javax.swing.JFrame {
                     .addComponent(rbtBici)))
         );
 
-        jpnFondo.add(jpnTipov, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 110));
+        jpnFondo.add(jpnTipov, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 130));
 
         jpnRegistro.setOpaque(false);
 
@@ -307,6 +301,7 @@ public class Parqueo extends javax.swing.JFrame {
         btnBuscar.setBackground(new java.awt.Color(0, 102, 204));
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa1.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.setBorderPainted(false);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -345,7 +340,7 @@ public class Parqueo extends javax.swing.JFrame {
                         .addComponent(lblH)
                         .addGap(22, 22, 22)
                         .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnExtrasLayout.setVerticalGroup(
             jpnExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +353,7 @@ public class Parqueo extends javax.swing.JFrame {
                 .addGroup(jpnExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblF)
                     .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jpnExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
