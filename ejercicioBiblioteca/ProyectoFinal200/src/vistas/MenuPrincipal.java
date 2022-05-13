@@ -29,10 +29,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnlData = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        btnVerUsuarios = new javax.swing.JButton();
         pnlExtras = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmbRegistroUsuario = new javax.swing.JMenuItem();
+        jmbVerUsuarios = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,24 +43,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         btnAgregar.setText("Crear usuario nuevo");
 
+        btnVerUsuarios.setText("Ver Usuarios");
+
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
         pnlDataLayout.setHorizontalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataLayout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(btnSalir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAgregar)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDataLayout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(btnAgregar))
+                    .addGroup(pnlDataLayout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVerUsuarios)
+                            .addComponent(btnSalir))))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataLayout.createSequentialGroup()
-                .addContainerGap(328, Short.MAX_VALUE)
-                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnAgregar))
+                .addGap(28, 28, 28)
+                .addComponent(btnAgregar)
+                .addGap(28, 28, 28)
+                .addComponent(btnVerUsuarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                .addComponent(btnSalir)
                 .addGap(26, 26, 26))
         );
 
@@ -77,6 +88,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmbRegistroUsuario.setText("Agregar usuario");
         jMenu1.add(jmbRegistroUsuario);
+
+        jmbVerUsuarios.setText("Ver Usuarios");
+        jMenu1.add(jmbVerUsuarios);
 
         jMenuBar1.add(jMenu1);
 
@@ -142,10 +156,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregar;
     public javax.swing.JButton btnSalir;
+    public javax.swing.JButton btnVerUsuarios;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     public javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenuItem jmbRegistroUsuario;
+    public javax.swing.JMenuItem jmbVerUsuarios;
     private javax.swing.JPanel pnlData;
     private javax.swing.JPanel pnlExtras;
     // End of variables declaration//GEN-END:variables

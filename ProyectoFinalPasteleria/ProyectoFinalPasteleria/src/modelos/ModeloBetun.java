@@ -7,10 +7,10 @@ public class ModeloBetun {
     private int id_betun;
     private String nombre_betun;
 
-    public ModeloBetun(int id_betun, String nombre_betun) {
-        this.id_betun = id_betun;
-        this.nombre_betun = nombre_betun;
+    public ModeloBetun() {
     }
+
+    
     
 
     public int getId_betun() {

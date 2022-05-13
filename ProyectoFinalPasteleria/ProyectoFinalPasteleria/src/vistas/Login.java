@@ -7,7 +7,7 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
-        setSize(550,330);
+        setSize(550,300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("LOGIN - Pastelería Sweet Creation");
@@ -36,6 +36,7 @@ public class Login extends javax.swing.JFrame {
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jpnFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

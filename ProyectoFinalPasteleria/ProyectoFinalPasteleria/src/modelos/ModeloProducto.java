@@ -6,16 +6,13 @@ public class ModeloProducto {
     
     private int id_producto;
     private double costo_unidad_producto;
-    private int disponible_producto;
+    private int disponible_producto=1;
     private String nombre_producto;
+    private String nombre_disponible;
 
-    public ModeloProducto(int id_producto, double costo_unidad_producto, int disponible_producto, String nombre_producto) {
-        this.id_producto = id_producto;
-        this.costo_unidad_producto = costo_unidad_producto;
-        this.disponible_producto = disponible_producto;
-        this.nombre_producto = nombre_producto;
+    public ModeloProducto() {
     }
-    
+
     
 
     public int getId_producto() {
@@ -48,6 +45,14 @@ public class ModeloProducto {
 
     public void setNombre_producto(String nombre_producto) {
         this.nombre_producto = nombre_producto;
+    }
+
+    public String getNombre_disponible() {
+        return nombre_disponible;
+    }
+
+    public void setNombre_disponible(String nombre_disponible) {
+        this.nombre_disponible = nombre_disponible;
     }
     
     

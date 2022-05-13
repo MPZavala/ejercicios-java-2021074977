@@ -29,11 +29,19 @@ public class ControladorMenu implements ActionListener {
         this.menuprincipal.btnSalir.addActionListener(this);
         this.menuprincipal.btnAgregar.addActionListener(this);
         this.menuprincipal.jmbRegistroUsuario.addActionListener(this);
+        
+        this.menuprincipal.btnVerUsuarios.addActionListener(this);
+        this.menuprincipal.jmbVerUsuarios.addActionListener(this);
     }
     
     public void agregar(){
         add.setVisible(true);
         Controlador addUser = new Controlador(add);
+    }
+    
+    public void verusuarios(){
+        int parametro=1;
+        Controlador veruser = new Controlador(parametro);
     }
     
     
@@ -49,6 +57,10 @@ public class ControladorMenu implements ActionListener {
             agregar();
         } else if(e.getSource()==menuprincipal.jmbRegistroUsuario) {
             agregar();
+        } else if (e.getSource()==menuprincipal.btnVerUsuarios) {
+            verusuarios();
+        } else if (e.getSource()==menuprincipal.jmbVerUsuarios){
+            verusuarios();
         }
     }
     

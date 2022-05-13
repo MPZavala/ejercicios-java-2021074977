@@ -7,9 +7,10 @@ public class ModeloRango {
     private int id_rango;
     private String nombre_rango;
 
-    public ModeloRango(int id_rango, String nombre_rango) {
-        this.id_rango = id_rango;
-        this.nombre_rango = nombre_rango;
+    
+
+    public ModeloRango() {
+        
     }
     
     

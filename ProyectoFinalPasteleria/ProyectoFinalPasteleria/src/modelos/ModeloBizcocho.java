@@ -6,10 +6,10 @@ public class ModeloBizcocho {
     private int id_bizcocho;
     private String nombre_bizcocho;
 
-    public ModeloBizcocho(int id_bizcocho, String nombre_bizcocho) {
-        this.id_bizcocho = id_bizcocho;
-        this.nombre_bizcocho = nombre_bizcocho;
+    public ModeloBizcocho() {
     }
+
+    
     
     
 

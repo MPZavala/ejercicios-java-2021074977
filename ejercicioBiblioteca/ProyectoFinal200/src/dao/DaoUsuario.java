@@ -3,6 +3,7 @@ package dao;
 
 import conexion.Conexion;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -84,6 +85,39 @@ public class DaoUsuario {
         }
         
         return false;
+    }
+    
+    public ArrayList<ModeloUsuario> listarusuario(){
+        
+        ArrayList<ModeloUsuario> lista=null;
+        con=connect.getConnection();
+        String sql="select * from usuarios";
+        
+        try {
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            
+            lista=new ArrayList();
+            
+            while(rs.next()) {
+                ModeloUsuario modusuario = new ModeloUsuario();
+                modusuario.setId(rs.getInt("id"));
+                modusuario.setNombre(rs.getString("nombre"));
+                modusuario.setUsuario(rs.getString("usuario"));
+                modusuario.setCorreo(rs.getString("correo"));
+                modusuario.setDireccion(rs.getString("direccion"));
+                modusuario.setTelefono(rs.getString("telefono"));
+                modusuario.setDpi(rs.getString("dpi"));
+                lista.add(modusuario);
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            
+        }
+        return lista;
     }
     
 }

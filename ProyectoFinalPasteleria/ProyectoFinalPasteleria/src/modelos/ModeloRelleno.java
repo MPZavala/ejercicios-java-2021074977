@@ -7,12 +7,10 @@ public class ModeloRelleno {
     private int id_relleno;
     private String nombre_relleno;
 
-    public ModeloRelleno(int id_relleno, String nombre_relleno) {
-        this.id_relleno = id_relleno;
-        this.nombre_relleno = nombre_relleno;
+    public ModeloRelleno() {
     }
-    
 
+    
     public int getId_relleno() {
         return id_relleno;
     }

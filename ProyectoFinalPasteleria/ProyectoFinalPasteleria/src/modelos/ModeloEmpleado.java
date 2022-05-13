@@ -10,6 +10,26 @@ public class ModeloEmpleado {
     private int telefono_empleado;
     private String usuario_empleado;
     private String pass_empleado;
+    private String correo_empleado;
+    private String descripcionrol;
+
+    public String getDescripcionrol() {
+        return descripcionrol;
+    }
+
+    public void setDescripcionrol(String descripcionrol) {
+        this.descripcionrol = descripcionrol;
+    }
+    
+    
+
+    public String getCorreo_empleado() {
+        return correo_empleado;
+    }
+
+    public void setCorreo_empleado(String correo_empleado) {
+        this.correo_empleado = correo_empleado;
+    }
 
     
     public int getId_empleado() {

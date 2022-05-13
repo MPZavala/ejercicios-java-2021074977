@@ -8,13 +8,12 @@ public class ModeloOferta {
     private int producto_oferta;
     private double valor_oferta;
     private String detalles_oferta;
+    private String nombre_producto;
 
-    public ModeloOferta(int id_oferta, int producto_oferta, double valor_oferta, String detalles_oferta) {
-        this.id_oferta = id_oferta;
-        this.producto_oferta = producto_oferta;
-        this.valor_oferta = valor_oferta;
-        this.detalles_oferta = detalles_oferta;
+    public ModeloOferta() {
     }
+
+    
     
     
 
@@ -48,6 +47,14 @@ public class ModeloOferta {
 
     public void setDetalles_oferta(String detalles_oferta) {
         this.detalles_oferta = detalles_oferta;
+    }
+
+    public String getNombre_producto() {
+        return nombre_producto;
+    }
+
+    public void setNombre_producto(String nombre_producto) {
+        this.nombre_producto = nombre_producto;
     }
     
     

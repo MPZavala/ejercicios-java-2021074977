@@ -7,11 +7,9 @@ public class ModeloDisponible {
     private int id_disponible;
     private String disponibilidad;
 
-    public ModeloDisponible(int id_disponible, String disponibilidad) {
-        this.id_disponible = id_disponible;
-        this.disponibilidad = disponibilidad;
+    public ModeloDisponible() {
     }
-    
+
     
 
     public int getId_disponible() {

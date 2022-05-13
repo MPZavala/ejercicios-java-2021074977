@@ -363,6 +363,12 @@ public class conexionconformulario extends javax.swing.JFrame {
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        cbxRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRolesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
         pnlDataLayout.setHorizontalGroup(
@@ -838,6 +844,10 @@ public class conexionconformulario extends javax.swing.JFrame {
     private void rbtCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtCodigoMouseClicked
         seleccion();
     }//GEN-LAST:event_rbtCodigoMouseClicked
+
+    private void cbxRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRolesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxRolesActionPerformed
 
     
     public static void main(String args[]) {

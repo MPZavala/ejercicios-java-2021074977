@@ -7,10 +7,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelos.Hash;
 import modelos.ModeloUsuario;
 import vistas.AgregarUser;
 import vistas.MenuPrincipal;
+import vistas.VerUsuarios;
 import vistas.login;
 
 
@@ -22,6 +25,7 @@ public class Controlador implements ActionListener, KeyListener {
     MenuPrincipal Menu = new MenuPrincipal();
     ModeloUsuario modusuario = new ModeloUsuario();
     DaoUsuario daousuario = new DaoUsuario();
+    VerUsuarios veruser = new VerUsuarios();
     
 
     public Controlador(login boton) {
@@ -41,6 +45,13 @@ public class Controlador implements ActionListener, KeyListener {
         this.add.btnAdd.addActionListener(this);
         this.add.btnCancelar.addActionListener(this);
         this.add.txtTelefonoRegistro.addKeyListener(this);
+    }
+    
+    public Controlador(int parametro){
+        if(parametro==1){
+            veruser.setVisible(true);
+            tablaverusuario(veruser.tblData);
+        }
     }
     
     public void ingresar(){
@@ -99,6 +110,33 @@ public class Controlador implements ActionListener, KeyListener {
             }
             
         }
+    }
+    
+    public void tablaverusuario(JTable tblData){
+        DefaultTableModel mimodel = new DefaultTableModel();
+        tblData.setModel(mimodel);
+        
+        mimodel.addColumn("Codigo");
+        mimodel.addColumn("Nombre");
+        mimodel.addColumn("Usuario");
+        mimodel.addColumn("Correo");
+        mimodel.addColumn("DPI");
+        mimodel.addColumn("Direccion");
+        mimodel.addColumn("Telefono");
+        
+        Object[] columna = new Object[7];
+        int numeroregistro=daousuario.listarusuario().size();
+        for(int i=0;i<numeroregistro;i++){
+            columna[0]=daousuario.listarusuario().get(i).getId();
+            columna[1]=daousuario.listarusuario().get(i).getNombre();
+            columna[2]=daousuario.listarusuario().get(i).getUsuario();
+            columna[3]=daousuario.listarusuario().get(i).getCorreo();
+            columna[4]=daousuario.listarusuario().get(i).getDpi();
+            columna[5]=daousuario.listarusuario().get(i).getDireccion();
+            columna[6]=daousuario.listarusuario().get(i).getTelefono();
+            mimodel.addRow(columna);
+        }
+        
     }
     
     
