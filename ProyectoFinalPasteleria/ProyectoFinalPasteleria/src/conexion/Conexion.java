@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 public class Conexion {
     
+    public static Conexion instanse;
     private static Connection con;
     String driver="com.mysql.jdbc.Driver";
     String user="root";
@@ -28,7 +29,7 @@ public class Conexion {
             
             Class.forName(driver);
             con = DriverManager.getConnection(datocon+BD, user, pass);
-            System.err.println("Conexión exitosa");
+            //System.err.println("Conexión exitosa");
             
         } catch (Exception error) {
             System.err.println(error);
@@ -38,6 +39,18 @@ public class Conexion {
         }
         
         
+        return con;
+    }
+    
+    //crear pausas en sistema
+    public synchronized static Conexion saberestado(){
+        if (instanse==null){
+            instanse = new Conexion();
+        }
+        return instanse;
+    }
+    
+    public Connection getCon(){
         return con;
     }
     

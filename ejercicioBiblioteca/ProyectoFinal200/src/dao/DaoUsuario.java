@@ -56,7 +56,7 @@ public class DaoUsuario {
     public boolean add(ModeloUsuario usuario) {
         int respuesta;
         con=connect.getConnection();
-        String addsql="insert into usuarios(usuario, password, nombre, correo, direccion, telefono, dpi) value(?,?,?,?,?,?,?)";
+        String addsql="insert into usuarios(usuario, password, nombre, correo, id_tipo, direccion, telefono, dpi) value(?,?,?,?,?,?,?,?)";
         
         try {
             ps=con.prepareStatement(addsql);
@@ -64,9 +64,10 @@ public class DaoUsuario {
             ps.setString(2, usuario.getPass());
             ps.setString(3, usuario.getNombre());
             ps.setString(4, usuario.getCorreo());
-            ps.setString(5, usuario.getDireccion());
-            ps.setString(6, usuario.getTelefono());
-            ps.setString(7, usuario.getDpi());
+            ps.setInt(5, usuario.getId_tipo());
+            ps.setString(6, usuario.getDireccion());
+            ps.setString(7, usuario.getTelefono());
+            ps.setString(8, usuario.getDpi());
             
             respuesta=ps.executeUpdate();
             
@@ -82,6 +83,46 @@ public class DaoUsuario {
             
         } catch (SQLException ex) {
             Logger.getLogger(DaoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            connect.CloseConnection();
+        }
+        
+        return false;
+    }
+    
+    public boolean editar(ModeloUsuario usuario){
+        
+        int respuesta;
+        con=connect.getConnection();
+        String addsql="update usuarios set usuario=?, nombre=?, correo=?, id_tipo=?, direccion=?, telefono=?, dpi=? where id=?";
+        
+        try {
+            ps=con.prepareStatement(addsql);
+            ps.setString(1, usuario.getUsuario());
+            ps.setString(2, usuario.getNombre());
+            ps.setString(3, usuario.getCorreo());
+            ps.setInt(4, usuario.getId_tipo());
+            ps.setString(5, usuario.getDireccion());
+            ps.setString(6, usuario.getTelefono());
+            ps.setString(7, usuario.getDpi());
+            ps.setInt(8, usuario.getId());
+            
+            respuesta=ps.executeUpdate();
+            
+            if(respuesta==1) {
+                
+                return true;
+                
+            }else {
+                
+                return false;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            connect.CloseConnection();
         }
         
         return false;
@@ -91,7 +132,7 @@ public class DaoUsuario {
         
         ArrayList<ModeloUsuario> lista=null;
         con=connect.getConnection();
-        String sql="select * from usuarios";
+        String sql="select * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipousuario = usuarios.id_tipo";
         
         try {
             ps=con.prepareStatement(sql);
@@ -108,6 +149,7 @@ public class DaoUsuario {
                 modusuario.setDireccion(rs.getString("direccion"));
                 modusuario.setTelefono(rs.getString("telefono"));
                 modusuario.setDpi(rs.getString("dpi"));
+                modusuario.setNombre_tipo(rs.getString("descripcion_tipousuario"));
                 lista.add(modusuario);
                 
             }

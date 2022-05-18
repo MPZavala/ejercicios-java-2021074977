@@ -85,14 +85,13 @@ public class DaoProducto {
         
         int respuesta;
         con=connect.getConnection();
-        String addsql="update producto set costo_unidad_producto=?, disponible_producto=?, nombre_producto=? where id_producto=?";
+        String addsql="update producto set costo_unidad_producto=?, nombre_producto=? where id_producto=?";
         
         try {
             ps=con.prepareStatement(addsql);
             ps.setDouble(1, modproducto.getCosto_unidad_producto());
-            ps.setInt(2, modproducto.getDisponible_producto());
-            ps.setString(3, modproducto.getNombre_producto());
-            ps.setString(4, id);
+            ps.setString(2, modproducto.getNombre_producto());
+            ps.setString(3, id);
             
             respuesta=ps.executeUpdate();
             
@@ -102,6 +101,36 @@ public class DaoProducto {
                 
             }else {
                 JOptionPane.showMessageDialog(null, "Error al editar producto");
+                return false;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean cambioestado(ModeloProducto modproducto) {
+        
+        int respuesta;
+        con=connect.getConnection();
+        String addsql="update producto set disponible_producto=? where id_producto=?";
+        
+        try {
+            ps=con.prepareStatement(addsql);
+            ps.setInt(1, modproducto.getDisponible_producto());
+            ps.setInt(2, modproducto.getId_producto());
+            
+            respuesta=ps.executeUpdate();
+            
+            if(respuesta==1) {
+                JOptionPane.showMessageDialog(null, "Estado actualizado");
+                return true;
+                
+            }else {
+                JOptionPane.showMessageDialog(null, "Error al editar estado");
                 return false;
             }
             
@@ -139,32 +168,6 @@ public class DaoProducto {
             connect.CloseConnection();
         }
         return listaproducto;
-    }
-    
-    public ArrayList<ModeloDisponible> disponibilidad() {
-        
-        ArrayList<ModeloDisponible> listadisponible=null;
-        con=connect.getConnection();
-        
-        try {
-            String sql="select * from disponible";
-            ps=con.prepareStatement(sql);
-            rs=ps.executeQuery();
-            listadisponible=new ArrayList();
-            
-            while(rs.next()){
-                ModeloDisponible disponible = new ModeloDisponible();
-                disponible.setId_disponible(rs.getInt("id_disponible"));
-                disponible.setDisponibilidad(rs.getString("disponibilidad"));
-                listadisponible.add(disponible);
-            }
-            
-        } catch(Exception error){
-            System.out.println(error.getMessage());
-        } finally {
-            connect.CloseConnection();
-        }
-        return listadisponible;
     }
     
 }

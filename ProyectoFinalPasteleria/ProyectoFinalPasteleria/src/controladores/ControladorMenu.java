@@ -8,8 +8,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.ModeloEmpleado;
 import modelos.ModeloRango;
+import vistas.Inventario;
 import vistas.Login;
 import vistas.MenuPrincipal;
+import vistas.NuevaOrden;
+import vistas.Ofertas;
+import vistas.Ordenes;
 import vistas.UserAdmin;
 
 
@@ -22,6 +26,10 @@ public class ControladorMenu implements ActionListener{
     DaoEmpleado daoempleado = new DaoEmpleado();
     DefaultTableModel mimodel;
     ModeloRango modrango = new ModeloRango();
+    NuevaOrden orden = new NuevaOrden();
+    Ordenes ordenes = new Ordenes();
+    Inventario inventario = new Inventario();
+    Ofertas oferta = new Ofertas();
     
     ModeloRango [][] roles= new ModeloRango[2][2];
     
@@ -35,10 +43,13 @@ public class ControladorMenu implements ActionListener{
         
         this.menu.lblNombre.setText(modempleado.getNombre_empleado());
         this.menu.lblRango.setText(modempleado.getDescripcionrol());
+        this.menu.lblIDEmpleado.setText(String.valueOf(modempleado.getId_empleado()));
         this.menu.btnCerrar.addActionListener(this);
-        this.usuarios.btnAgregar.addActionListener(this);
         this.menu.btnAdministrar.addActionListener(this);
-        
+        this.menu.btnNueva.addActionListener(this);
+        this.menu.btnOrdenes.addActionListener(this);
+        this.menu.btnInventario.addActionListener(this);
+        this.menu.btnOfertas.addActionListener(this);
         
         
         //visibilizar boton para administradores
@@ -63,6 +74,15 @@ public class ControladorMenu implements ActionListener{
         } else if(e.getSource()==menu.btnAdministrar){
             ControladorLogin admin = new ControladorLogin();
             
+        } else if (e.getSource()==menu.btnNueva){
+            int id = Integer.parseInt(menu.lblIDEmpleado.getText());
+            ControladorOrdenes neworder = new ControladorOrdenes(orden, id);
+        } else if (e.getSource()==menu.btnOrdenes){
+            ControladorOrdenes order = new ControladorOrdenes(ordenes);
+        } else if (e.getSource()==menu.btnInventario){
+            ControladorProducto inventory = new ControladorProducto(inventario);
+        } else if (e.getSource()==menu.btnOfertas){
+            ControladorOfertas ofer = new ControladorOfertas();
         }
     }
     

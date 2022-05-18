@@ -12,13 +12,11 @@ public class ModeloProducto {
 
     public ModeloProducto() {
     }
-
     
-
     public int getId_producto() {
         return id_producto;
     }
-
+    
     public void setId_producto(int id_producto) {
         this.id_producto = id_producto;
     }
@@ -55,6 +53,13 @@ public class ModeloProducto {
         this.nombre_disponible = nombre_disponible;
     }
     
+    public void nodisponible(ModeloDisponible disponible){
+        this.disponible_producto=2;
+    }
+    
+    public void disponible(ModeloDisponible disponible){
+        this.disponible_producto=1;
+    }
     
     
 }

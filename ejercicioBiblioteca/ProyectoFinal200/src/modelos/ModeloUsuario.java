@@ -13,6 +13,7 @@ public class ModeloUsuario {
     private String direccion;
     private String telefono;
     private String dpi;
+    private String nombre_tipo;
 
     public int getId() {
         return id;
@@ -92,6 +93,14 @@ public class ModeloUsuario {
 
     public void setDpi(String dpi) {
         this.dpi = dpi;
+    }
+
+    public String getNombre_tipo() {
+        return nombre_tipo;
+    }
+
+    public void setNombre_tipo(String nombre_tipo) {
+        this.nombre_tipo = nombre_tipo;
     }
     
     

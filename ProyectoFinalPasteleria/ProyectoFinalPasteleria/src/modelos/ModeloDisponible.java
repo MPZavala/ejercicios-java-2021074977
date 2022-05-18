@@ -9,9 +9,7 @@ public class ModeloDisponible {
 
     public ModeloDisponible() {
     }
-
     
-
     public int getId_disponible() {
         return id_disponible;
     }

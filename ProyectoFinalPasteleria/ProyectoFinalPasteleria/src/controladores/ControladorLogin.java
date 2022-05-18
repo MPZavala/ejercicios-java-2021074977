@@ -2,6 +2,7 @@
 package controladores;
 
 import dao.DaoEmpleado;
+import dao.DaoRol;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -22,6 +23,7 @@ public class ControladorLogin implements ActionListener, MouseListener{
     MenuPrincipal menu = new MenuPrincipal();
     DaoEmpleado daoempleado = new DaoEmpleado();
     UserAdmin usuarios = new UserAdmin();
+    DaoRol daorol = new DaoRol();
     
     String[][] rango = new String[2][10];
     int fila=-1;
@@ -43,6 +45,7 @@ public class ControladorLogin implements ActionListener, MouseListener{
         
         
         this.usuarios.btnAgregar.addActionListener(this);
+        this.usuarios.btnEditPw.addActionListener(this);
         this.usuarios.btnEditar.addActionListener(this);
         this.usuarios.btnEliminar.addActionListener(this);
         this.usuarios.btnSalir.addActionListener(this);
@@ -73,7 +76,7 @@ public class ControladorLogin implements ActionListener, MouseListener{
         if (usuarios.txtNombre.getText().equals("") || usuarios.txtCorreo.getText().equals("") || usuarios.txtTelefono.getText().equals("") || usuarios.txtUser.getText().equals("") || usuarios.txtPass.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos antes de continuar");
         } else {
-            System.out.println(cambioidrol(1,0,usuarios.cmbRango.getItemAt(usuarios.cmbRango.getSelectedIndex())));
+            //System.out.println(cambioidrol(1,0,usuarios.cmbRango.getItemAt(usuarios.cmbRango.getSelectedIndex())));
             modempleado.setNombre_empleado(usuarios.txtNombre.getText());
             modempleado.setRango_empleado(Integer.parseInt(cambioidrol(1,0,usuarios.cmbRango.getItemAt(usuarios.cmbRango.getSelectedIndex()))));
             modempleado.setTelefono_empleado(Integer.parseInt(usuarios.txtTelefono.getText()));
@@ -92,7 +95,7 @@ public class ControladorLogin implements ActionListener, MouseListener{
     }
     
     public void editar(){
-        if (usuarios.txtNombre.getText().equals("") || usuarios.txtCorreo.getText().equals("") || usuarios.txtTelefono.getText().equals("") || usuarios.txtUser.getText().equals("") || usuarios.txtPass.getText().equals("")) {
+        if (usuarios.txtNombre.getText().equals("") || usuarios.txtCorreo.getText().equals("") || usuarios.txtTelefono.getText().equals("") || usuarios.txtUser.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "No puede haber datos en blanco al editar un empleado");
         } else {
             int rol = Integer.parseInt(cambioidrol(1,0,usuarios.cmbRango.getItemAt(usuarios.cmbRango.getSelectedIndex())));
@@ -104,10 +107,31 @@ public class ControladorLogin implements ActionListener, MouseListener{
             modempleado.setCorreo_empleado(usuarios.txtCorreo.getText());
             modempleado.setPass_empleado(usuarios.txtPass.getText());
             
+            
+            
             if (daoempleado.edit(modempleado, id)){
                 limpiar();
             } else {
-                System.out.println("error en controlador");
+                
+                
+            }
+        }
+        
+    }
+    
+    public void newpw(){
+        if (usuarios.txtId.getText().equals("") || usuarios.txtPass.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Necesita seleccionar un usuario e ingresar una contraseña para proceder con el cambio");
+        } else {
+            String id = usuarios.txtId.getText();
+            modempleado.setPass_empleado(usuarios.txtPass.getText());
+            
+            
+            
+            if (daoempleado.edit(modempleado, id)){
+                limpiar();
+            } else {
+                
                 
             }
         }
@@ -192,10 +216,10 @@ public class ControladorLogin implements ActionListener, MouseListener{
     
     public void rango(){
         int contador=0;
-        int count=daoempleado.roles().size();
+        int count=daorol.roles().size();
             for(int i=0;i<count;i++){
-                rango[0][i]=String.valueOf(daoempleado.roles().get(i).getId_rango());
-                rango[1][i]=daoempleado.roles().get(i).getNombre_rango();
+                rango[0][i]=String.valueOf(daorol.roles().get(i).getId_rango());
+                rango[1][i]=daorol.roles().get(i).getNombre_rango();
                 usuarios.cmbRango.addItem(rango[1][i]);
             }
         
@@ -220,6 +244,8 @@ public class ControladorLogin implements ActionListener, MouseListener{
             limpiar();
         } else if (e.getSource()==usuarios.btnEditar) {
             editar();
+        } else if (e.getSource()==usuarios.btnEditPw){
+            newpw();
         }
     }
 

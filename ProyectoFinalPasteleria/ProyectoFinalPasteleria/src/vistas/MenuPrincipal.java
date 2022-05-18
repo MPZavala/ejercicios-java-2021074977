@@ -16,6 +16,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("MENU - Pastelería Sweet Creation");
         this.btnCerrar.setOpaque(true);
+        setResizable(false);
         
         
     }
@@ -38,6 +39,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnAdministrar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jpnUser = new javax.swing.JPanel();
+        lblIDEmpleado = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblPfp = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -98,7 +100,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCerrar.setBorder(null);
         btnCerrar.setBorderPainted(false);
         btnCerrar.setContentAreaFilled(false);
-        btnCerrar.setOpaque(false);
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -139,15 +140,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jpnMenuLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(btnCerrar))
-                    .addGroup(jpnMenuLayout.createSequentialGroup()
-                        .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jpnFondo.add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 750, 420));
 
         jpnUser.setOpaque(false);
         jpnUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblIDEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblIDEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jpnUser.add(lblIDEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 110, 20));
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_peque.png"))); // NOI18N
@@ -296,6 +300,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jpnUser;
     private javax.swing.JLabel lblBarra;
     private javax.swing.JLabel lblFondo;
+    public javax.swing.JLabel lblIDEmpleado;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMinimizar;
     public javax.swing.JLabel lblNombre;

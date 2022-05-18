@@ -1,15 +1,19 @@
 
 package controladores;
 
+import dao.DaoRol;
 import dao.DaoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.Hash;
+import modelos.ModeloTipoUsuario;
 import modelos.ModeloUsuario;
 import vistas.AgregarUser;
 import vistas.MenuPrincipal;
@@ -17,7 +21,7 @@ import vistas.VerUsuarios;
 import vistas.login;
 
 
-public class Controlador implements ActionListener, KeyListener {
+public class Controlador implements ActionListener, KeyListener, MouseListener {
     
     //Declarar mis vistas
     login Login = new login();
@@ -26,6 +30,10 @@ public class Controlador implements ActionListener, KeyListener {
     ModeloUsuario modusuario = new ModeloUsuario();
     DaoUsuario daousuario = new DaoUsuario();
     VerUsuarios veruser = new VerUsuarios();
+    DaoRol daorol = new DaoRol();
+    
+    //para cmbRol
+    String[][] roles = new String[2][10];
     
 
     public Controlador(login boton) {
@@ -50,8 +58,13 @@ public class Controlador implements ActionListener, KeyListener {
     public Controlador(int parametro){
         if(parametro==1){
             veruser.setVisible(true);
+            cargarol();
             tablaverusuario(veruser.tblData);
-        }
+            
+            //definir escucha de evento
+            this.veruser.tblData.addMouseListener(this);
+            this.veruser.btnEditar.addActionListener(this);
+        } 
     }
     
     public void ingresar(){
@@ -98,6 +111,7 @@ public class Controlador implements ActionListener, KeyListener {
             modusuario.setDireccion(add.txtDireccionRegistro.getText());
             modusuario.setTelefono(add.txtTelefonoRegistro.getText());
             modusuario.setDpi(add.txtDpiRegistro.getText());
+            modusuario.setId_tipo(Integer.parseInt(cambioidrol(1,0,veruser.cmbRolVer.getItemAt(veruser.cmbRolVer.getSelectedIndex()))));
             
             if (daousuario.add(modusuario)){
                 limpiar();
@@ -112,6 +126,33 @@ public class Controlador implements ActionListener, KeyListener {
         }
     }
     
+    public void edituser(){
+        if (veruser.txtUserVer.getText().equals("") || veruser.txtNombreVer.getText().equals("") || veruser.txtCorreoVer.getText().equals("") || veruser.txtDireccionVer.getText().equals("") || veruser.txtTelefonoVer.getText().equals("") || veruser.txtDpiVer.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos antes de continuar");
+        } else {
+            modusuario.setId(Integer.parseInt(veruser.txtIDVer.getText()));
+            modusuario.setUsuario(veruser.txtUserVer.getText());
+            modusuario.setNombre(veruser.txtNombreVer.getText());
+            modusuario.setCorreo(veruser.txtCorreoVer.getText());
+            modusuario.setDireccion(veruser.txtDireccionVer.getText());
+            modusuario.setTelefono(veruser.txtTelefonoVer.getText());
+            modusuario.setDpi(veruser.txtDpiVer.getText());
+            modusuario.setId_tipo(Integer.parseInt(cambioidrol(1,0,veruser.cmbRolVer.getItemAt(veruser.cmbRolVer.getSelectedIndex()))));
+            
+            boolean respuesta = daousuario.editar(modusuario);
+            if (respuesta==true){
+                JOptionPane.showMessageDialog(null, "Usuario actualizado");
+                limpiaredit();
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar usuario");
+                
+            }
+            
+        }
+        
+    }
+    
     public void tablaverusuario(JTable tblData){
         DefaultTableModel mimodel = new DefaultTableModel();
         tblData.setModel(mimodel);
@@ -123,8 +164,9 @@ public class Controlador implements ActionListener, KeyListener {
         mimodel.addColumn("DPI");
         mimodel.addColumn("Direccion");
         mimodel.addColumn("Telefono");
+        mimodel.addColumn("Rol");
         
-        Object[] columna = new Object[7];
+        Object[] columna = new Object[8];
         int numeroregistro=daousuario.listarusuario().size();
         for(int i=0;i<numeroregistro;i++){
             columna[0]=daousuario.listarusuario().get(i).getId();
@@ -134,6 +176,7 @@ public class Controlador implements ActionListener, KeyListener {
             columna[4]=daousuario.listarusuario().get(i).getDpi();
             columna[5]=daousuario.listarusuario().get(i).getDireccion();
             columna[6]=daousuario.listarusuario().get(i).getTelefono();
+            columna[7]=daousuario.listarusuario().get(i).getNombre_tipo();
             mimodel.addRow(columna);
         }
         
@@ -164,6 +207,17 @@ public class Controlador implements ActionListener, KeyListener {
         add.txtDpiRegistro.setText("");
     }
     
+    public void limpiaredit(){
+        veruser.txtCorreoVer.setText("");
+        veruser.txtDireccionVer.setText("");
+        veruser.txtDpiVer.setText("");
+        veruser.txtIDVer.setText("");
+        veruser.txtNombreVer.setText("");
+        veruser.txtTelefonoVer.setText("");
+        veruser.txtUserVer.setText("");
+        tablaverusuario(veruser.tblData);
+    }
+    
     public void validarnumeros(String valor){
         
         if(valor.matches("^[0-9]{1,8}")) {
@@ -171,6 +225,38 @@ public class Controlador implements ActionListener, KeyListener {
                 JOptionPane.showMessageDialog(null, "El valor ingresado en el teléfono es inválido");
                 add.txtTelefonoRegistro.setText("");
             }
+    }
+    
+    //cargar roles conexion con dao tiporol
+    public void cargarol(){
+        int numeroreg=daorol.mostrar().size();
+        
+        for(int i=0;i<numeroreg;i++){
+            roles[0][i]=String.valueOf(daorol.mostrar().get(i).getId_tipousuario());
+            roles[1][i]=daorol.mostrar().get(i).getDescrip_tipousuario();
+            veruser.cmbRolVer.addItem(roles[1][i]);
+        }
+    }
+    
+    public String cambioidrol(int valorinicial, int valorfinal, String texto) {
+        
+        String Texto="";
+        
+        
+        try {
+            for (int i=0;i<roles[valorinicial].length;i++){
+                if(roles[valorinicial][i]==null){
+                    
+                } else if (roles[valorinicial][i].equals(texto)){
+                    Texto= roles[valorfinal][i];
+                    break;
+                }
+            }
+            
+        } catch(Exception error){
+            System.out.println(error.getMessage());
+        }
+        return Texto;
     }
     
 
@@ -187,6 +273,8 @@ public class Controlador implements ActionListener, KeyListener {
         } else if(e.getSource()==add.btnCancelar) {
             add.setVisible(false);
             add.dispose();
+        }else if (e.getSource()==veruser.btnEditar) {
+            edituser();
         }
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -209,7 +297,47 @@ public class Controlador implements ActionListener, KeyListener {
         } else if (e.getSource()==add.txtTelefonoRegistro) {
             String valor=add.txtTelefonoRegistro.getText();
             validarnumeros(valor);
+        } 
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+        int col=veruser.tblData.getColumnCount();
+        String[] parametro = new String[col];
+        
+        for (int i=0;i<col;i++){
+            parametro[i]=String.valueOf(veruser.tblData.getValueAt(veruser.tblData.getSelectedRow(), i));
+        
         }
+        veruser.txtIDVer.setText(parametro[0]);
+        veruser.txtNombreVer.setText(parametro[1]);
+        veruser.txtUserVer.setText(parametro[2]);
+        veruser.txtCorreoVer.setText(parametro[3]);
+        veruser.txtDpiVer.setText(parametro[4]);
+        veruser.txtDireccionVer.setText(parametro[5]);
+        veruser.txtTelefonoVer.setText(parametro[6]);
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
     }
     
     

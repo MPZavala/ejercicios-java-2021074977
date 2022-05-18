@@ -14,6 +14,7 @@ public class UserAdmin extends javax.swing.JFrame {
         setSize(660,600);
         setLocationRelativeTo(null);
         setTitle("ADMINISTRAR USUARIOS - Pastelería Sweet Creation");
+        setResizable(false);
     }
 
     /**
@@ -45,6 +46,7 @@ public class UserAdmin extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnDeseleccionar = new javax.swing.JButton();
+        btnEditPw = new javax.swing.JButton();
         jpnUser = new javax.swing.JPanel();
         lblMinimizar = new javax.swing.JLabel();
         lblSalir = new javax.swing.JLabel();
@@ -85,47 +87,53 @@ public class UserAdmin extends javax.swing.JFrame {
 
         btnDeseleccionar.setText("Deseleccionar");
 
+        btnEditPw.setText("Cambiar Contraseña");
+
         javax.swing.GroupLayout jpnMenuLayout = new javax.swing.GroupLayout(jpnMenu);
         jpnMenu.setLayout(jpnMenuLayout);
         jpnMenuLayout.setHorizontalGroup(
             jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblId)
-                        .addComponent(lblNombre)
-                        .addComponent(lblCorreo))
-                    .addComponent(lblTelefono))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(txtCorreo)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtId))
-                .addGap(41, 41, 41)
                 .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpnMenuLayout.createSequentialGroup()
-                        .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRango)
-                            .addComponent(lblUser)
-                            .addComponent(lblPass))
-                        .addGap(18, 18, 18)
+                        .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblId)
+                                .addComponent(lblNombre)
+                                .addComponent(lblCorreo))
+                            .addComponent(lblTelefono))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbRango, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUser)
-                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtTelefono)
+                            .addComponent(txtId))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpnMenuLayout.createSequentialGroup()
+                                .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblRango)
+                                    .addComponent(lblUser)
+                                    .addComponent(lblPass))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbRango, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUser)
+                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpnMenuLayout.createSequentialGroup()
+                                .addComponent(btnAgregar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar)))
+                        .addGap(27, 27, 27))
                     .addGroup(jpnMenuLayout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)))
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnMenuLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeseleccionar)
-                .addGap(116, 116, 116))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEditPw)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnDeseleccionar)
+                        .addContainerGap())))
         );
         jpnMenuLayout.setVerticalGroup(
             jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,10 +166,12 @@ public class UserAdmin extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeseleccionar))
+                .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeseleccionar)
+                    .addComponent(btnEditPw)))
         );
 
-        jpnFondo.add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 560, 190));
+        jpnFondo.add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 550, 190));
 
         jpnUser.setOpaque(false);
         jpnUser.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -342,6 +352,7 @@ public class UserAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregar;
     public javax.swing.JButton btnDeseleccionar;
+    public javax.swing.JButton btnEditPw;
     public javax.swing.JButton btnEditar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnSalir;

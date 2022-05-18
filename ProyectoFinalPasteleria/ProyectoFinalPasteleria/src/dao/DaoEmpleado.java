@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelos.ModeloEmpleado;
-import modelos.ModeloRango;
 
 
 public class DaoEmpleado {
@@ -58,6 +57,8 @@ public class DaoEmpleado {
             
         } catch (SQLException error){
             System.out.println(error);
+        }finally{
+            connect.CloseConnection();
         }
         return false;
     }
@@ -91,6 +92,8 @@ public class DaoEmpleado {
             
         } catch (SQLException ex) {
             Logger.getLogger(DaoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            connect.CloseConnection();
         }
         
         return false;
@@ -120,6 +123,8 @@ public class DaoEmpleado {
             
         } catch (SQLException ex) {
             Logger.getLogger(DaoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            connect.CloseConnection();
         }
         
         return false;
@@ -129,17 +134,16 @@ public class DaoEmpleado {
         
         int respuesta;
         con=connect.getConnection();
-        String addsql="update empleado set nombre_empleado=?,rango_empleado=?,telefono_empleado=?,usuario_empleado=?,pass_empleado=?,correo_empleado=? where id_empleado=?";
+        String addsql="update empleado set nombre_empleado=?,rango_empleado=?,telefono_empleado=?,usuario_empleado=?,correo_empleado=? where id_empleado=?";
         
         try {
             ps=con.prepareStatement(addsql);
-            ps.setString(7, id);
+            ps.setString(6, id);
             ps.setString(1, modempleado.getNombre_empleado());
             ps.setInt(2, modempleado.getRango_empleado());
             ps.setInt(3, modempleado.getTelefono_empleado());
             ps.setString(4, modempleado.getUsuario_empleado());
-            ps.setString(5, modempleado.getPass_empleado());
-            ps.setString(6, modempleado.getCorreo_empleado());
+            ps.setString(5, modempleado.getCorreo_empleado());
             
             respuesta=ps.executeUpdate();
             
@@ -155,6 +159,40 @@ public class DaoEmpleado {
             
         } catch (SQLException ex) {
             Logger.getLogger(DaoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            connect.CloseConnection();
+        }
+        
+        return false;
+    }
+    
+    public boolean newpass(ModeloEmpleado modempleado, String id) {
+        
+        int respuesta;
+        con=connect.getConnection();
+        String addsql="update empleado set pass_empleado=? where id_empleado=?";
+        
+        try {
+            ps=con.prepareStatement(addsql);
+            ps.setString(2, id);
+            ps.setString(1, modempleado.getPass_empleado());
+            
+            respuesta=ps.executeUpdate();
+            
+            if(respuesta==1) {
+                JOptionPane.showMessageDialog(null, "Contraseña actualizada");
+                return true;
+                
+            }else {
+                JOptionPane.showMessageDialog(null, "Error al modificar la contraseña del usuario seleccionado");
+                return false;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            connect.CloseConnection();
         }
         
         return false;
@@ -193,31 +231,6 @@ public class DaoEmpleado {
         return lista;
     }
     
-    public ArrayList<ModeloRango> roles() {
-        //Cargar la info del array en el combobox
-        ArrayList<ModeloRango> listarol=null;
-        con=connect.getConnection();
-        
-        
-        try {
-            String rolsql="select * from rango";
-            ps=con.prepareStatement(rolsql);
-            rs=ps.executeQuery();
-            listarol=new ArrayList();
-            
-            while(rs.next()){
-                ModeloRango rango = new ModeloRango();
-                rango.setId_rango(rs.getInt("id_rango"));
-                rango.setNombre_rango(rs.getString("nombre_rango"));
-                listarol.add(rango);
-            }
-            
-        } catch(Exception error){
-            System.out.println(error.getMessage());
-        } finally {
-            connect.CloseConnection();
-        }
-        return listarol;
-    }
+    
     
 }

@@ -5,10 +5,8 @@ package modelos;
 public class ModeloOferta {
     
     private int id_oferta;
-    private int producto_oferta;
     private double valor_oferta;
     private String detalles_oferta;
-    private String nombre_producto;
 
     public ModeloOferta() {
     }
@@ -23,14 +21,6 @@ public class ModeloOferta {
 
     public void setId_oferta(int id_oferta) {
         this.id_oferta = id_oferta;
-    }
-
-    public int getProducto_oferta() {
-        return producto_oferta;
-    }
-
-    public void setProducto_oferta(int producto_oferta) {
-        this.producto_oferta = producto_oferta;
     }
 
     public double getValor_oferta() {
@@ -48,15 +38,5 @@ public class ModeloOferta {
     public void setDetalles_oferta(String detalles_oferta) {
         this.detalles_oferta = detalles_oferta;
     }
-
-    public String getNombre_producto() {
-        return nombre_producto;
-    }
-
-    public void setNombre_producto(String nombre_producto) {
-        this.nombre_producto = nombre_producto;
-    }
-    
-    
     
 }

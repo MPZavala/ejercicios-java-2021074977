@@ -11,6 +11,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("LOGIN - Pastelería Sweet Creation");
+        setResizable(false);
     }
 
     /**
